@@ -34,7 +34,7 @@ else:
 '''
 if computer == you:
     print("Draw")
-elif (computer - you) == 1 and (computer - you) == -2:
+elif (computer - you) == 1 or (computer - you) == -2:
     print("You Win")
 else:
     print("You loss")
