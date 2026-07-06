@@ -1,8 +1,12 @@
+import requests
 import speech_recognition as sr
 import pyttsx3
 import webbrowser
+import study_material as sm
+
 
 engine = pyttsx3.init() 
+newsapi = "4b8412eb8d304172941735b03f38e190"
     
 def speak(text):
     engine.say(text)#add text to queue
@@ -16,9 +20,19 @@ def processCommand(command):
     elif "open linkedin" in command.lower():
         webbrowser.open("https://linkedin.com")  
     elif "open youtube" in command.lower():
-        webbrowser.open("https://youtube.com")  
-            
-        
+        webbrowser.open("https://youtube.com")
+    elif command.lower().startswith("play"):
+        video = command.lower().split(" ")[1]#important
+        link = sm.material[video]
+        webbrowser.open(link)    
+    elif "news" in command.lower():
+        req = requests.get(f"https://newsapi.org/v2/top-headlines?country=in&apiKey={newsapi}")
+        if req.status_code == 200:
+            data = req.json()
+            articles = data["articles"]
+            for article in articles:
+                speak(article["title"])
+                
 
 if __name__ == "__main__":
     r = sr.Recognizer()
