@@ -6,6 +6,7 @@ import study_material as sm
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+from datetime import datetime
  
 load_dotenv()
 newsapi = os.getenv("NEWS_API_KEY")
@@ -28,7 +29,12 @@ def aiProcesses(command):
             {"role": "user", "content": command},
         ]
     )
-    return completion.choices[0].message.content   
+    return completion.choices[0].message.content  
+
+def tellTime():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    return current_time
 
 def processCommand(command):
     if "open google" in command.lower():
@@ -39,6 +45,10 @@ def processCommand(command):
         webbrowser.open("https://linkedin.com")  
     elif "open youtube" in command.lower():
         webbrowser.open("https://youtube.com")
+        
+    elif "time" in command.lower():
+        current_time = tellTime()
+        speak(f"The current time is {current_time}")
         
     elif command.lower().startswith("play"):
         video = command.lower().split(" ")[1]#important
