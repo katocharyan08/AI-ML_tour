@@ -36,6 +36,11 @@ def tellTime():
     current_time = now.strftime("%H:%M:%S")
     return current_time
 
+def tellDate():
+    now = datetime.now()
+    current_date = now.strftime("%d%B%Y")
+    return current_date
+
 def processCommand(command):
     if "open google" in command.lower():
         webbrowser.open("https://google.com")  
@@ -49,6 +54,10 @@ def processCommand(command):
     elif "time" in command.lower():
         current_time = tellTime()
         speak(f"The current time is {current_time}")
+        
+    elif "date" in command.lower():
+        current_date = tellDate()
+        speak(f"The current date is {current_date}")
         
     elif command.lower().startswith("play"):
         video = command.lower().split(" ")[1]#important
@@ -95,6 +104,9 @@ if __name__ == "__main__":
                     command = r.recognize_google(audio)
                     print(f"Command received: {command}")
                     processCommand(command)
+            elif "exit" in word.lower() or "quit" in word.lower() or "stop" in word.lower():
+                speak("Goodbye!")
+                break        
                  
         except Exception as e:
             print(f"Error : {e}")         
