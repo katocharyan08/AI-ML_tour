@@ -42,10 +42,12 @@ def tellDate():
     return current_date
 
 def processCommand(command):
-    if "open google" in command.lower():
-        webbrowser.open("https://google.com")  
+    if "music" in command.lower():
+        webbrowser.open("https://www.youtube.com/watch?v=gkSO4JmJ8L4&list=RDgkSO4JmJ8L4&start_radio=1")  
     elif "open github" in command.lower():
         webbrowser.open("https://github.com")  
+    elif "open google" in command.lower():
+        webbrowser.open("https://google.com")  
     elif "open linkedin" in command.lower():
         webbrowser.open("https://linkedin.com")  
     elif "open youtube" in command.lower():
